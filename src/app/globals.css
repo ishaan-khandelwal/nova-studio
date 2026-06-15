@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* theme-light (default) */
+  --bg-primary: #faf9f6;
+  --bg-card: #ffffff;
+  --border-primary: rgba(0, 0, 0, 0.08);
+  --border-accent: rgba(79, 70, 229, 0.15);
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  --text-accent: #4f46e5;
+  --bg-badge: rgba(79, 70, 229, 0.05);
+  --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --accent-glow: rgba(79, 70, 229, 0.2);
+  --selection-bg: #4f46e5;
+  --selection-text: #ffffff;
+  --glass-bg: rgba(250, 249, 246, 0.75);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.theme-dark {
+  --bg-primary: #0b0f19;
+  --bg-card: #151b2d;
+  --border-primary: rgba(255, 255, 255, 0.08);
+  --border-accent: rgba(129, 140, 248, 0.2);
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #6b7280;
+  --text-accent: #818cf8;
+  --bg-badge: rgba(129, 140, 248, 0.08);
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --selection-bg: #6366f1;
+  --selection-text: #ffffff;
+  --glass-bg: rgba(11, 15, 25, 0.75);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.theme-mint {
+  --bg-primary: #f0fbf7;
+  --bg-card: #ffffff;
+  --border-primary: rgba(16, 185, 129, 0.1);
+  --border-accent: rgba(16, 185, 129, 0.2);
+  --text-primary: #064e3b;
+  --text-secondary: #047857;
+  --text-muted: #6ee7b7;
+  --text-accent: #10b981;
+  --bg-badge: rgba(16, 185, 129, 0.05);
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --accent-glow: rgba(16, 185, 129, 0.25);
+  --selection-bg: #10b981;
+  --selection-text: #ffffff;
+  --glass-bg: rgba(240, 251, 247, 0.75);
+}
+
+.theme-violet {
+  --bg-primary: #0d0818;
+  --bg-card: #160f29;
+  --border-primary: rgba(217, 70, 239, 0.1);
+  --border-accent: rgba(217, 70, 239, 0.25);
+  --text-primary: #fae8ff;
+  --text-secondary: #e879f9;
+  --text-muted: #a21caf;
+  --text-accent: #d946ef;
+  --bg-badge: rgba(217, 70, 239, 0.08);
+  --accent-gradient: linear-gradient(135deg, #d946ef 0%, #8b5cf6 100%);
+  --accent-glow: rgba(217, 70, 239, 0.35);
+  --selection-bg: #d946ef;
+  --selection-text: #ffffff;
+  --glass-bg: rgba(13, 8, 24, 0.75);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+.glass-effect {
+  backdrop-filter: blur(12px);
+  background-color: var(--glass-bg);
+  border: 1px solid var(--border-primary);
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+  border-color: var(--text-accent);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }
