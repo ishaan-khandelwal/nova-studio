@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Palette, Code, Sparkles } from "lucide-react";
 import axios from "axios";
 
@@ -35,26 +34,18 @@ export default function Services() {
     <section id="services" className="py-24 px-4 border-t transition-colors duration-300" style={{ borderColor: 'var(--border-primary)' }}>
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <h2
             className="text-3xl md:text-5xl font-extrabold mb-4"
             style={{ color: "var(--text-primary)" }}
           >
             Our Expertise
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          </h2>
+          <p
             className="text-base md:text-lg max-w-2xl mx-auto"
             style={{ color: "var(--text-secondary)" }}
           >
             We deliver top-tier fullstack engineering and branding solutions tailored to help digital brands scale.
-          </motion.p>
+          </p>
         </div>
 
         {loading && (
@@ -77,13 +68,8 @@ export default function Services() {
             {services.map((service, index) => {
               const IconComponent = IconMap[service.icon] || Code;
               return (
-                <motion.div
+                <div
                   key={service.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
                   className="p-8 rounded-3xl border shadow-sm transition-all duration-300 flex flex-col justify-between"
                   style={{
                     backgroundColor: "var(--bg-card)",
@@ -125,7 +111,7 @@ export default function Services() {
                     <span>Learn More</span>
                     <span>&rarr;</span>
                   </a>
-                </motion.div>
+                </div>
               );
             })}
           </div>

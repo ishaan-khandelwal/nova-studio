@@ -7,7 +7,6 @@ export async function getAllProjects() {
     });
   } catch (error) {
     console.error('Error fetching projects from database:', error.message);
-    // Graceful fallback to initial projects to keep landing page visual
     return [
       {
         id: 'fallback-1',
@@ -38,7 +37,6 @@ export async function getAllProjects() {
 }
 
 export async function createProject(data) {
-  // If database fails, throw a descriptive error
   try {
     return await prisma.project.create({
       data: {

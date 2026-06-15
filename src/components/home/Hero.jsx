@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function Hero() {
@@ -26,10 +25,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <div
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6 text-xs md:text-sm font-bold shadow-sm"
           style={{
             backgroundColor: "var(--bg-badge)",
@@ -39,50 +35,37 @@ export default function Hero() {
         >
           <Sparkles size={14} />
           <span>Award Winning Digital Agency</span>
-        </motion.div>
+        </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+        <h1
           className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight"
           style={{ color: "var(--text-primary)" }}
         >
           We Construct Digital Products at <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--accent-gradient)" }}>Nova Studio</span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+        <p
           className="text-base md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed"
           style={{ color: "var(--text-secondary)" }}
         >
           A digital agency platform tailored to design, build, and deploy premium web applications. We blend cutting-edge technology with high-fidelity design to elevate your business.
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+        <div
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <motion.a
+          <a
             href="#contact"
             onClick={triggerCtaClick}
-            whileHover={{ scale: 1.05, boxShadow: "0px 8px 25px var(--accent-glow)" }}
-            whileTap={{ scale: 0.95 }}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-bold text-white shadow-lg transition-all"
             style={{ background: "var(--accent-gradient)" }}
           >
             <span>Start a Project</span>
             <ArrowRight size={18} />
-          </motion.a>
+          </a>
 
-          <motion.a
+          <a
             href="#portfolio"
-            whileHover={{ scale: 1.05, backgroundColor: "var(--bg-badge)" }}
-            whileTap={{ scale: 0.95 }}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-bold border transition-all"
             style={{
               borderColor: "var(--border-primary)",
@@ -91,8 +74,8 @@ export default function Hero() {
             }}
           >
             <span>Explore Work</span>
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
       </div>
     </section>
   );

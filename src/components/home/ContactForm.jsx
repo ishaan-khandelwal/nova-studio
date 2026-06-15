@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { validateContactForm } from "@/lib/validations";
 import axios from "axios";
@@ -55,33 +54,21 @@ export default function ContactForm() {
     <section id="contact" className="py-24 px-4 border-t transition-colors duration-300" style={{ borderColor: 'var(--border-primary)' }}>
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <h2
             className="text-3xl md:text-5xl font-extrabold mb-4"
             style={{ color: "var(--text-primary)" }}
           >
             Start a Project
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          </h2>
+          <p
             className="text-base md:text-lg"
             style={{ color: "var(--text-secondary)" }}
           >
             Have an idea or a project in mind? Fill out the form and our team will get back to you shortly.
-          </motion.p>
+          </p>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+        <div
           className="p-8 md:p-12 rounded-3xl border shadow-lg"
           style={{
             backgroundColor: "var(--bg-card)",
@@ -89,9 +76,7 @@ export default function ContactForm() {
           }}
         >
           {status === "success" && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
+            <div
               className="flex items-center gap-3 p-4 rounded-xl border mb-8 text-emerald-800 bg-emerald-50 dark:bg-emerald-950/10 dark:text-emerald-300"
               style={{ borderColor: "rgba(16, 185, 129, 0.2)" }}
             >
@@ -99,13 +84,11 @@ export default function ContactForm() {
               <div className="text-sm font-semibold">
                 Thank you! Your inquiry was submitted successfully. We will reach out soon.
               </div>
-            </motion.div>
+            </div>
           )}
 
           {status === "error" && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
+            <div
               className="flex items-center gap-3 p-4 rounded-xl border mb-8 text-rose-800 bg-rose-50 dark:bg-rose-950/10 dark:text-rose-300"
               style={{ borderColor: "rgba(244, 63, 94, 0.2)" }}
             >
@@ -113,7 +96,7 @@ export default function ContactForm() {
               <div className="text-sm font-semibold">
                 An error occurred. Please try again or check your database configuration.
               </div>
-            </motion.div>
+            </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -189,11 +172,9 @@ export default function ContactForm() {
               )}
             </div>
 
-            <motion.button
+            <button
               type="submit"
               disabled={loading}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
               className="w-full inline-flex items-center justify-center gap-2 rounded-xl py-4 font-bold text-white shadow-md transition-all cursor-pointer"
               style={{
                 background: "var(--accent-gradient)",
@@ -211,9 +192,9 @@ export default function ContactForm() {
                   <span>Send Message</span>
                 </>
               )}
-            </motion.button>
+            </button>
           </form>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

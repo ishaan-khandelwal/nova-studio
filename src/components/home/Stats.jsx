@@ -1,8 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useStats } from "@/hooks/useStats";
-import CountUp from "react-countup";
 
 export default function Stats() {
   const { stats, loading, error } = useStats();
@@ -27,24 +25,15 @@ export default function Stats() {
         {!loading && !error && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             {stats.map((stat, index) => (
-              <motion.div
+              <div
                 key={stat.key || index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
                 className="p-8 rounded-3xl"
               >
                 <div
                   className="text-5xl md:text-6xl font-extrabold mb-3 bg-clip-text text-transparent"
                   style={{ backgroundImage: "var(--accent-gradient)" }}
                 >
-                  <CountUp
-                    end={stat.value}
-                    duration={2.5}
-                    enableScrollSpy={true}
-                    scrollSpyOnce={true}
-                  />
+                  {stat.value}
                   <span>{stat.suffix}</span>
                 </div>
                 <h3
@@ -53,7 +42,7 @@ export default function Stats() {
                 >
                   {stat.label}
                 </h3>
-              </motion.div>
+              </div>
             ))}
           </div>
         )}

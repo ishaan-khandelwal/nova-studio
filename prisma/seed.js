@@ -5,7 +5,7 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 
 const dbUrl = process.env.DATABASE_URL || 'file:./dev.db';
-const resolvedUrl = dbUrl.startsWith('file:') 
+const resolvedUrl = dbUrl.startsWith('file:')
   ? `file:${path.resolve(process.cwd(), dbUrl.replace('file:', ''))}`
   : dbUrl;
 
@@ -15,10 +15,10 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
   console.log('Starting seeding...');
 
-  // Seed Admin User
+
   const adminUsername = process.env.ADMIN_USERNAME || 'admin';
   const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
-  
+
   const existingAdmin = await prisma.user.findUnique({
     where: { username: adminUsername },
   });
@@ -36,7 +36,6 @@ async function main() {
     console.log('Admin user already exists');
   }
 
-  // Seed Stats
   const stats = [
     { key: 'projects', label: 'Projects Completed', value: 150, suffix: '+' },
     { key: 'clients', label: 'Clients Worldwide', value: 50, suffix: '+' },
@@ -52,7 +51,6 @@ async function main() {
   }
   console.log('Stats seeded');
 
-  // Seed Projects if empty
   const projectCount = await prisma.project.count();
   if (projectCount === 0) {
     const projects = [

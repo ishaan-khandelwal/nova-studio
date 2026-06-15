@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon, Leaf, Sparkles, ChevronDown } from "lucide-react";
 
 const THEMES = [
@@ -88,8 +87,7 @@ export default function ThemeToggle() {
     return (
         <div className="relative" ref={dropdownRef}>
 
-            <motion.button
-                whileTap={{ scale: 0.93 }}
+            <button
                 onClick={() => setIsOpen((o) => !o)}
                 className="flex items-center gap-1.5 rounded-full border px-3 py-2 text-xs font-semibold shadow-sm transition-all duration-200 hover:shadow-md"
                 style={{
@@ -115,97 +113,90 @@ export default function ThemeToggle() {
                         color: "var(--text-muted)",
                     }}
                 />
-            </motion.button>
+            </button>
 
 
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -6, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -6, scale: 0.96 }}
-                        transition={{ duration: 0.18, ease: "easeOut" }}
-                        className="absolute right-0 top-full z-[200] mt-2 w-52 rounded-2xl border shadow-2xl overflow-hidden"
+            {isOpen && (
+                <div
+                    className="absolute right-0 top-full z-[200] mt-2 w-52 rounded-2xl border shadow-2xl overflow-hidden"
+                    style={{
+                        backgroundColor: "var(--bg-card)",
+                        borderColor: "var(--border-primary)",
+                    }}
+                >
+                    <div
+                        className="px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest"
+                        style={{ color: "var(--text-muted)" }}
+                    >
+                        Choose Theme
+                    </div>
+
+                    <ul className="p-2 space-y-1">
+                        {THEMES.map((theme) => {
+                            const Icon = theme.icon;
+                            const isActive = theme.id === activeTheme;
+                            return (
+                                <li key={theme.id}>
+                                    <button
+                                        onClick={() => applyTheme(theme.id)}
+                                        className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-150"
+                                        style={{
+                                            backgroundColor: isActive
+                                                ? `${theme.accent}20`
+                                                : "transparent",
+                                            border: isActive
+                                                ? `1px solid ${theme.accent}50`
+                                                : "1px solid transparent",
+                                        }}
+                                        id={`theme-option-${theme.id}`}
+                                    >
+
+                                        <span
+                                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg shadow-sm"
+                                            style={{ backgroundColor: theme.bg, border: `2px solid ${theme.accent}` }}
+                                        >
+                                            <Icon size={14} style={{ color: theme.accent }} />
+                                        </span>
+                                        <div className="flex-1 min-w-0">
+                                            <div
+                                                className="text-xs font-bold"
+                                                style={{
+                                                    color: isActive ? theme.accent : "var(--text-primary)",
+                                                }}
+                                            >
+                                                {theme.label}
+                                            </div>
+                                            <div
+                                                className="text-[10px]"
+                                                style={{ color: "var(--text-muted)" }}
+                                            >
+                                                {theme.desc}
+                                            </div>
+                                        </div>
+
+                                        {isActive && (
+                                            <span
+                                                className="h-2 w-2 rounded-full shrink-0"
+                                                style={{ backgroundColor: theme.accent }}
+                                            />
+                                        )}
+                                    </button>
+                                </li>
+                            );
+                        })}
+                    </ul>
+
+                    <div
+                        className="border-t px-3 py-2 text-center text-[10px]"
                         style={{
-                            backgroundColor: "var(--bg-card)",
                             borderColor: "var(--border-primary)",
+                            color: "var(--text-muted)",
                         }}
                     >
-                        <div
-                            className="px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest"
-                            style={{ color: "var(--text-muted)" }}
-                        >
-                            Choose Theme
-                        </div>
-
-                        <ul className="p-2 space-y-1">
-                            {THEMES.map((theme) => {
-                                const Icon = theme.icon;
-                                const isActive = theme.id === activeTheme;
-                                return (
-                                    <li key={theme.id}>
-                                        <button
-                                            onClick={() => applyTheme(theme.id)}
-                                            className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-150"
-                                            style={{
-                                                backgroundColor: isActive
-                                                    ? `${theme.accent}20`
-                                                    : "transparent",
-                                                border: isActive
-                                                    ? `1px solid ${theme.accent}50`
-                                                    : "1px solid transparent",
-                                            }}
-                                            id={`theme-option-${theme.id}`}
-                                        >
-
-                                            <span
-                                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg shadow-sm"
-                                                style={{ backgroundColor: theme.bg, border: `2px solid ${theme.accent}` }}
-                                            >
-                                                <Icon size={14} style={{ color: theme.accent }} />
-                                            </span>
-                                            <div className="flex-1 min-w-0">
-                                                <div
-                                                    className="text-xs font-bold"
-                                                    style={{
-                                                        color: isActive ? theme.accent : "var(--text-primary)",
-                                                    }}
-                                                >
-                                                    {theme.label}
-                                                </div>
-                                                <div
-                                                    className="text-[10px]"
-                                                    style={{ color: "var(--text-muted)" }}
-                                                >
-                                                    {theme.desc}
-                                                </div>
-                                            </div>
-
-                                            {isActive && (
-                                                <motion.span
-                                                    layoutId="activeThemeDot"
-                                                    className="h-2 w-2 rounded-full shrink-0"
-                                                    style={{ backgroundColor: theme.accent }}
-                                                />
-                                            )}
-                                        </button>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-
-                        <div
-                            className="border-t px-3 py-2 text-center text-[10px]"
-                            style={{
-                                borderColor: "var(--border-primary)",
-                                color: "var(--text-muted)",
-                            }}
-                        >
-                            Your preference is saved locally
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                        Your preference is saved locally
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
