@@ -5,9 +5,16 @@ import path from 'path';
 let prisma;
 
 const dbUrl = process.env.DATABASE_URL || 'file:./dev.db';
-const resolvedUrl = dbUrl.startsWith('file:') 
-  ? `file:${path.resolve(process.cwd(), dbUrl.replace('file:', ''))}`
-  : dbUrl;
+
+// Resolve relative SQLite paths against cwd, but keep absolute paths as-is.
+function resolveDbUrl(url) {
+  if (!url.startsWith('file:')) return url; // libsql:// or other remote URLs
+  const filePart = url.slice(5); // strip 'file:'
+  if (path.isAbsolute(filePart)) return url; // already absolute, e.g. file:/tmp/dev.db
+  return `file:${path.resolve(process.cwd(), filePart)}`;
+}
+
+const resolvedUrl = resolveDbUrl(dbUrl);
 
 const adapterOptions = { url: resolvedUrl };
 if (process.env.TURSO_AUTH_TOKEN) {

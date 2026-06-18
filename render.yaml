@@ -4,17 +4,17 @@ services:
     env: node
     plan: free
     buildCommand: npm install && npm run build
-    startCommand: npx prisma db push && node prisma/seed.js && npm start
+    startCommand: npx prisma db push --accept-data-loss && node prisma/seed.js && npm start
     envVars:
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
-        value: file:./dev.db # Can be overridden in Render dashboard (e.g. for Turso: libsql://...)
+        value: file:/tmp/dev.db
       - key: JWT_SECRET
-        generateValue: true # Generates a random secure string automatically
+        generateValue: true
       - key: ADMIN_USERNAME
-        sync: false # Prompts the user during initial deployment (e.g. admin)
+        sync: false
       - key: ADMIN_PASSWORD
-        sync: false # Prompts the user during initial deployment (e.g. admin123)
+        sync: false
       - key: TURSO_AUTH_TOKEN
-        sync: false # Optional: Prompts the user if they choose to use Turso DB for persistent storage
+        sync: false

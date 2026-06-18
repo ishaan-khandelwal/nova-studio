@@ -5,9 +5,15 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 
 const dbUrl = process.env.DATABASE_URL || 'file:./dev.db';
-const resolvedUrl = dbUrl.startsWith('file:')
-  ? `file:${path.resolve(process.cwd(), dbUrl.replace('file:', ''))}`
-  : dbUrl;
+
+function resolveDbUrl(url) {
+  if (!url.startsWith('file:')) return url;
+  const filePart = url.slice(5);
+  if (path.isAbsolute(filePart)) return url;
+  return `file:${path.resolve(process.cwd(), filePart)}`;
+}
+
+const resolvedUrl = resolveDbUrl(dbUrl);
 
 const adapter = new PrismaLibSql({ url: resolvedUrl });
 const prisma = new PrismaClient({ adapter });
